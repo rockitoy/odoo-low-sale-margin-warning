@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_config_settings_low_sale_margin_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.low.sale.margin.view.form.inherit.sale</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="10"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-string='Sales']/div[2]/div[5]" position="after">
+                <div class="col-12 col-lg-6 o_setting_box" attrs="{'invisible': [('module_sale_margin', '=', False)]}"
+                     title="The margin is computed as the sum of product sales prices minus the cost set in their detail form.">
+                    <div>
+                        <label for="low_sale_margin"/>
+                        <div class="text-muted">
+                            Set Sale Margin in Target %
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <field name="low_sale_margin"/>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

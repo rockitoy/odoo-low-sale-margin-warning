@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="sale_margin_percentage_sale_order" model="ir.ui.view">
+        <field name="name">sale.order.process.status.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_margin.sale_margin_sale_order"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='margin']" position="after">
+                <field name="low_sale_margin" invisible="1"/>
+                <label for="margin_percentage"/>
+                <div class="o_row" groups="base.group_user">
+                    <field name="margin_percentage" decoration-danger="margin_percentage&lt;low_sale_margin"/>
+                    <field name="percent_symbol" decoration-danger="margin_percentage&lt;low_sale_margin"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
