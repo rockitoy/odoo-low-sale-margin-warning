@@ -12,17 +12,17 @@ class SaleOrder(models.Model):
     percent_symbol = fields.Char(default='%', readonly=True)
 
     @api.multi
-    @api.depends('order_line.purchase_price', 'order_line.product_uom_qty', 'order_line.margin')
+    @api.depends('order_line.price_unit', 'order_line.product_uom_qty', 'order_line.margin')
     def _product_margin_percent(self):
         for order in self:
             total_qty = 0
-            total_cost = 0
+            total_sale = 0
             for line in order.order_line:
                 total_qty += line.product_uom_qty
-                total_cost += line.purchase_price
+                total_sale += line.price_unit
 
-            if total_cost > 0 and order.margin != 0:
-                order.margin_percentage = (order.margin / (total_cost * total_qty)) * 100
+            if total_sale > 0 and order.margin != 0:
+                order.margin_percentage = (order.margin / (total_sale * total_qty)) * 100
 
     @api.multi
     def _low_sale_margin(self):
